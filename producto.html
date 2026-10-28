@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEXN3D · Producto</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body><header id="h"></header>
+<main class="page"><div class="w"><a href="productos.html" class="sub">← Volver a productos</a><div id="d" class="det"></div></div></main>
+<footer id="f"></footer><script src="app.js"></script>
+<script>
+const q=new URLSearchParams(location.search),ped=q.get('t')==='p',p=(ped?PEDIDO:STOCK)[+q.get('i')];
+const d=document.getElementById('d');
+if(p){
+  document.title='NEXN3D · '+p[0];
+  d.innerHTML=`<div class="im"><img src="img/${slug(p[0])}.jpg" alt="${p[0]}" onerror="this.replaceWith(document.createTextNode('📦'))"></div>
+  <div><span class="tag ${ped?'or':''}" style="position:static;display:inline-block;margin-bottom:12px">${ped?'BAJO PEDIDO':'EN STOCK'}</span>
+  <h2>${p[0]}</h2><p class="pr" style="font-size:22px">${ped?'Desde ':''}$${p[1]} MXN</p>
+  <p style="margin:16px 0 24px;color:var(--mu)">${p[3]||'Descripción próxima. Escríbenos por WhatsApp para más detalles.'}</p>
+  <a class="btn ${ped?'or':'fill'}" target="_blank" rel="noopener" href="https://wa.me/${WA}?text=${encodeURIComponent((ped?'Quiero cotizar: ':'Quiero comprar: ')+p[0])}">${ped?'Solicitar cotización':'Comprar por WhatsApp'}</a></div>`;
+}else d.innerHTML='<p>Producto no encontrado.</p>';
+</script></body></html>
